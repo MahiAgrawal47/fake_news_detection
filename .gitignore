@@ -1,6 +1,11 @@
-.csv
+
 
 notebook/eda.ipynb
 data/combined_news.csv
 
+
+
+data/*.csv
 data/*.zip
+*.zip
+*.csv
