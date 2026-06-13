@@ -3,6 +3,7 @@ from sklearn.linear_model import LogisticRegression
 #from sklearn.svm import SVC
 from sklearn.svm import LinearSVC
 from sklearn.metrics import accuracy_score,classification_report,confusion_matrix
+from src.utils import text_cleaning
 #from sklearn.ensemble import RandomForestClassifier
 #from sklearn.tree import DecisionTreeClassifier
 #from xgboost import XGBClassifier
@@ -97,11 +98,14 @@ if __name__ == "__main__":
         train_df = pd.read_csv("artifacts/train.csv")
         test_df = pd.read_csv("artifacts/test.csv")
 
+        train_df["text"] = train_df["text"].apply(text_cleaning)
+        test_df["text"] = test_df["text"].apply(text_cleaning)
+
         x_train = vectorizer.transform(train_df["text"])
         x_test = vectorizer.transform(test_df["text"])
         y_train = train_df["output"]
         y_test = test_df["output"]
 
         obj = ModelTraining()
-        obj.train_model(x_train, y_train, x_test, y_test)      
+        obj.train_model(x_train, y_train, x_test, y_test)
             

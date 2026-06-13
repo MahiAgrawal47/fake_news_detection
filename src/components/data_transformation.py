@@ -1,5 +1,5 @@
 import pickle
-from src.utils import get_vectorizer, fit_vectorizer, transform_vectorizer
+from src.utils import get_vectorizer, fit_vectorizer, transform_vectorizer , text_cleaning
 import pandas as pd
 
 print("🚀 data_transformation.py STARTED")
@@ -13,9 +13,9 @@ class DataTransformation:
         
 
         
-        #train_df['text']=train_df['text'].apply(text_cleaning)
+        train_df['text']=train_df['text'].apply(text_cleaning)
         
-       # test_df['text']=test_df['text'].apply(text_cleaning)
+        test_df['text']=test_df['text'].apply(text_cleaning)
         
         vectorizer = get_vectorizer()
         

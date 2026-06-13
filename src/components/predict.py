@@ -1,6 +1,6 @@
 import pickle
 import pandas as pd
-#from src.utils import text_cleaning
+from src.utils import text_cleaning
 
 
 def load_artifacts():
@@ -11,9 +11,9 @@ def load_artifacts():
     return vectorizer,model    
 
 def prediction(text):
-    #cleaned_text=text_cleaning(text)
+    cleaned_text=text_cleaning(text)
     vectorizer,model=load_artifacts()
-    vectorized_text=vectorizer.transform(text)
+    vectorized_text=vectorizer.transform([cleaned_text])
     predicted=model.predict(vectorized_text)
 
     if(predicted[0]==0):

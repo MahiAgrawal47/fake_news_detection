@@ -4,28 +4,65 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fake News Detector</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
 </head>
 
 <body>
-    <div class="container">
-        <h1 class="title">📰 Fake News Detector</h1>
+    <div class="scanline"></div>
+    <div class="wrapper">
 
-        <form action="/predict" method="POST" class="form">
-            <textarea 
-                name="news_text" 
-                placeholder="Enter the news text here..."
-                required
-            ></textarea>
+        <div class="panel input-panel">
+            <div class="eyebrow">AUTOMATED CREDIBILITY ANALYSIS</div>
+            <h1 class="title">Fake News Detector</h1>
+            <p class="subtitle">Paste an article or headline below. The model scores it as REAL or FAKE based on linguistic patterns learned from labeled news data.</p>
 
-            <button type="submit" class="btn">Predict</button>
-        </form>
+            <form action="/predict" method="POST" class="form">
+                <label for="news_text" class="field-label">ARTICLE TEXT</label>
+                <textarea 
+                    id="news_text"
+                    name="news_text" 
+                    placeholder="Enter the news text here..."
+                    required
+                ></textarea>
 
-        {% if result %}
-        <div class="result {{ result_class }}">
-            {{ result }}
+                <button type="submit" class="btn">Analyze</button>
+            </form>
+
+            <div class="footer">Model: TF-IDF Vectorizer + Classifier<br>For educational use only</div>
         </div>
-        {% endif %}
+
+        <div class="panel result-panel">
+            <div class="field-label">VERDICT</div>
+
+            {% if result %}
+            <div class="verdict {{ result_class }}">
+                <div class="verdict-icon">
+                    {% if result_class == 'real' %}✔{% else %}✕{% endif %}
+                </div>
+                <div class="verdict-text">{{ result }}</div>
+            </div>
+            <div class="meter">
+                <div class="meter-fill {{ result_class }}"></div>
+            </div>
+            <div class="meter-label">
+                {% if result_class == 'real' %}
+                Classified as credible content
+                {% else %}
+                Classified as likely misinformation
+                {% endif %}
+            </div>
+            {% else %}
+            <div class="verdict empty">
+                <div class="verdict-icon">?</div>
+                <div class="verdict-text">Awaiting input</div>
+            </div>
+            <div class="meter-label muted">&gt; submit an article to see analysis_</div>
+            {% endif %}
+        </div>
+
     </div>
 </body>
 </html>
