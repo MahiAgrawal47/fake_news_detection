@@ -44,7 +44,7 @@ Fake_news_detection/
 
 1. **Data Ingestion** – splits the dataset into train/test sets
 2. **Data Transformation** – cleans text (removes source artifacts, stopwords, lemmatizes) and converts it to TF-IDF vectors
-3. **Model Training** – trains multiple models (Logistic Regression, Naive Bayes, LinearSVC), evaluates each, and saves the best-performing one
+3. **Model Training** – trains multiple models (Logistic Regression, Naive Bayes, random forest), evaluates each, and saves the best-performing one
 4. **Prediction** – the Flask app loads the saved vectorizer and model to classify user-submitted text in real time
 
 ## Setup & Usage
@@ -69,9 +69,6 @@ python app.py
 ```
 then click on the link generated
 
-## Methodology Notes
-
-During development, an early version of the model achieved ~99% accuracy, which on investigation turned out to be largely driven by **dataset leakage** — the model was distinguishing articles by source-identifying artifacts (e.g. wire-service tags like "(Reuters)", image credit boilerplate like "Featured image via Getty", and outlet names) rather than by actual content patterns. These artifacts were identified by inspecting model feature importances and removed via targeted text preprocessing, after which the model was retrained to rely more on genuine linguistic signal.
 
 ## Future Improvements
 
