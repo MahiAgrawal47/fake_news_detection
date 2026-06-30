@@ -47,27 +47,39 @@ Fake_news_detection/
 3. **Model Training** – trains multiple models (Logistic Regression, Naive Bayes, random forest), evaluates each, and saves the best-performing one
 4. **Prediction** – the Flask app loads the saved vectorizer and model to classify user-submitted text in real time
 
-## Setup & Usage
+## Setup
 
-### 1. Clone the repo and install dependencies
+## Installation
+
 ```bash
-git clone <my-repo-url>
+git clone <repo-url>
 cd Fake_news_detection
 pip install -r requirements.txt
 ```
 
-### 2. Run the training pipeline
+## Run the Application
+
+```bash
+python app.py
+```
+
+Then open the URL displayed in the terminal.
+
+## Retrain the Model (Optional)
+
+If you want to train the model from scratch:
+
 ```bash
 python -m src.components.data_ingestion
 python -m src.components.data_transformation
 python -m src.components.model_train
 ```
 
-### 3. Launch the web app
+After training, launch the application:
+
 ```bash
 python app.py
 ```
-then click on the link generated
 
 
 ## Future Improvements
